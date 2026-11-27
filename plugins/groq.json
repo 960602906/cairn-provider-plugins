@@ -1,0 +1,25 @@
+{
+  "$schema": "../schema/provider-plugin.schema.json",
+  "schemaVersion": 1,
+  "id": "groq",
+  "name": "Groq",
+  "version": "1.0.0",
+  "description": "GroqCloud's OpenAI-compatible API for open-weight models.",
+  "homepage": "https://groq.com",
+  "providers": [
+    {
+      "id": "api",
+      "name": "Groq",
+      "kind": "openai",
+      "category": "relay",
+      "baseUrl": "https://api.groq.com/openai/v1",
+      "keysUrl": "https://console.groq.com/keys",
+      "suggestedModels": ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"],
+      "modelDefaults": {
+        "contextWindow": 131072,
+        "maxOutputTokens": 16384,
+        "supportsReasoning": false
+      }
+    }
+  ]
+}

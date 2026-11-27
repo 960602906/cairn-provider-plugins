@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/provider-plugin.schema.json",
+  "schemaVersion": 1,
+  "id": "vllm",
+  "name": "vLLM",
+  "version": "1.0.0",
+  "description": "A vLLM OpenAI-compatible server on this computer (vllm serve, default port 8000).",
+  "homepage": "https://docs.vllm.ai",
+  "providers": [
+    {
+      "id": "server",
+      "name": "vLLM",
+      "kind": "openai",
+      "category": "local",
+      "requiresKey": false,
+      "baseUrl": "http://localhost:8000/v1",
+      "compat": {
+        "maxTokensField": "max_tokens",
+        "supportsDeveloperRole": false,
+        "supportsStore": false
+      },
+      "modelDefaults": {
+        "contextWindow": 32768,
+        "maxOutputTokens": 4096,
+        "supportsTools": true,
+        "supportsParallelToolCalls": false,
+        "supportsReasoning": false
+      }
+    }
+  ]
+}

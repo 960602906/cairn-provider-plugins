@@ -1,0 +1,13 @@
+{
+  "name": "cairn-provider-plugins",
+  "private": true,
+  "description": "Catalog of data-only provider plugins for Cairn.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1"
+  }
+}

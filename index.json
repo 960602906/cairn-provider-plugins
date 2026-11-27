@@ -1,0 +1,46 @@
+{
+  "$schema": "./schema/index.schema.json",
+  "schemaVersion": 1,
+  "plugins": [
+    {
+      "id": "cerebras",
+      "name": "Cerebras",
+      "version": "1.0.0",
+      "description": "Cerebras Inference's OpenAI-compatible API for open-weight models.",
+      "homepage": "https://www.cerebras.ai",
+      "url": "plugins/cerebras.json"
+    },
+    {
+      "id": "groq",
+      "name": "Groq",
+      "version": "1.0.0",
+      "description": "GroqCloud's OpenAI-compatible API for open-weight models.",
+      "homepage": "https://groq.com",
+      "url": "plugins/groq.json"
+    },
+    {
+      "id": "llama-cpp",
+      "name": "llama.cpp",
+      "version": "1.0.0",
+      "description": "A llama.cpp server on this computer (llama-server, default port 8080).",
+      "homepage": "https://github.com/ggml-org/llama.cpp",
+      "url": "plugins/llama-cpp.json"
+    },
+    {
+      "id": "together",
+      "name": "Together AI",
+      "version": "1.0.0",
+      "description": "Together AI's OpenAI-compatible API for open-weight models.",
+      "homepage": "https://www.together.ai",
+      "url": "plugins/together.json"
+    },
+    {
+      "id": "vllm",
+      "name": "vLLM",
+      "version": "1.0.0",
+      "description": "A vLLM OpenAI-compatible server on this computer (vllm serve, default port 8000).",
+      "homepage": "https://docs.vllm.ai",
+      "url": "plugins/vllm.json"
+    }
+  ]
+}

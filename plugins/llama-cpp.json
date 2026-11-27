@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/provider-plugin.schema.json",
+  "schemaVersion": 1,
+  "id": "llama-cpp",
+  "name": "llama.cpp",
+  "version": "1.0.0",
+  "description": "A llama.cpp server on this computer (llama-server, default port 8080).",
+  "homepage": "https://github.com/ggml-org/llama.cpp",
+  "providers": [
+    {
+      "id": "server",
+      "name": "llama.cpp",
+      "kind": "openai",
+      "category": "local",
+      "requiresKey": false,
+      "baseUrl": "http://localhost:8080/v1",
+      "compat": {
+        "maxTokensField": "max_tokens",
+        "supportsDeveloperRole": false,
+        "supportsStore": false
+      },
+      "modelDefaults": {
+        "contextWindow": 32768,
+        "maxOutputTokens": 4096,
+        "supportsTools": true,
+        "supportsParallelToolCalls": false,
+        "supportsReasoning": false
+      }
+    }
+  ]
+}

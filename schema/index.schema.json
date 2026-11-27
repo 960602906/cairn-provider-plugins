@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/960602906/cairn-provider-plugins/main/schema/index.schema.json",
+  "title": "Cairn provider plugin catalog index (schemaVersion 1)",
+  "description": "The list of plugins Cairn offers to install from this catalog. Unknown fields are ignored.",
+  "type": "object",
+  "required": ["schemaVersion", "plugins"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "plugins": {
+      "type": "array",
+      "maxItems": 256,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": ["id", "name", "version", "url"],
+      "properties": {
+        "id": {
+          "description": "Must equal the id inside the plugin file.",
+          "type": "string",
+          "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
+        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "\\S" },
+        "version": {
+          "description": "Must equal the version inside the plugin file.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "description": { "type": "string", "maxLength": 280 },
+        "homepage": {
+          "description": "Must equal the homepage inside the plugin file. Used for the favicon fallback.",
+          "type": "string",
+          "maxLength": 2048,
+          "pattern": "^https://[^\\s/?#@]+(?:[/?#]\\S*)?$"
+        },
+        "icon": { "$ref": "#/$defs/urlOrPath" },
+        "url": { "$ref": "#/$defs/urlOrPath" }
+      }
+    },
+    "urlOrPath": {
+      "description": "An https URL, or a path relative to index.json (no leading '/', no '..').",
+      "type": "string",
+      "maxLength": 2048,
+      "anyOf": [
+        { "pattern": "^https://[^\\s/?#@]+(?:[/?#]\\S*)?$" },
+        { "pattern": "^(?![a-zA-Z][a-zA-Z0-9+.-]*:)(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\s?#\\\\]+$" }
+      ]
+    }
+  }
+}
