@@ -2,9 +2,12 @@
   "$schema": "../schema/provider-plugin.schema.json",
   "schemaVersion": 1,
   "id": "llama-cpp",
+  "type": "provider",
   "name": "llama.cpp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A llama.cpp server on this computer (llama-server, default port 8080).",
+  "source": "official",
+  "author": "Cairn",
   "homepage": "https://github.com/ggml-org/llama.cpp",
   "providers": [
     {
