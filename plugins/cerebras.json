@@ -1,0 +1,29 @@
+{
+  "$schema": "../schema/provider-plugin.schema.json",
+  "schemaVersion": 1,
+  "id": "cerebras",
+  "name": "Cerebras",
+  "version": "1.0.0",
+  "description": "Cerebras Inference's OpenAI-compatible API for open-weight models.",
+  "homepage": "https://www.cerebras.ai",
+  "providers": [
+    {
+      "id": "api",
+      "name": "Cerebras",
+      "kind": "openai",
+      "category": "relay",
+      "baseUrl": "https://api.cerebras.ai/v1",
+      "keysUrl": "https://cloud.cerebras.ai",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsStore": false
+      },
+      "suggestedModels": ["gpt-oss-120b"],
+      "modelDefaults": {
+        "contextWindow": 131072,
+        "maxOutputTokens": 32768,
+        "supportsReasoning": true
+      }
+    }
+  ]
+}

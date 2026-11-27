@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/960602906/cairn-provider-plugins/main/schema/provider-plugin.schema.json",
+  "title": "Cairn provider plugin (schemaVersion 1)",
+  "description": "Mirrors ProviderPluginManifest in @cairn/protocol, plus the optional icon fields. Unknown fields are ignored by Cairn, except inside compat.",
+  "type": "object",
+  "required": ["schemaVersion", "id", "name", "providers"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "id": { "$ref": "#/$defs/pluginId" },
+    "name": { "$ref": "#/$defs/name" },
+    "version": { "type": "string", "maxLength": 32 },
+    "description": { "type": "string", "maxLength": 280 },
+    "homepage": { "$ref": "#/$defs/httpsUrl" },
+    "icon": { "$ref": "#/$defs/httpsUrl" },
+    "providers": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "items": { "$ref": "#/$defs/provider" }
+    }
+  },
+  "$defs": {
+    "pluginId": {
+      "description": "Lowercase letters, digits and '-', 1-64 characters, not starting or ending with '-'.",
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "\\S"
+    },
+    "baseUrl": {
+      "description": "http or https, no user name or password.",
+      "type": "string",
+      "maxLength": 2048,
+      "pattern": "^https?://[^\\s/?#@]+(?:[/?#]\\S*)?$"
+    },
+    "httpsUrl": {
+      "type": "string",
+      "maxLength": 2048,
+      "pattern": "^https://[^\\s/?#@]+(?:[/?#]\\S*)?$"
+    },
+    "modelId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "positiveInt": { "type": "integer", "minimum": 1 },
+    "price": { "type": "number", "minimum": 0 },
+    "region": {
+      "type": "object",
+      "required": ["id", "baseUrl"],
+      "properties": {
+        "id": { "enum": ["global", "cn"] },
+        "baseUrl": { "$ref": "#/$defs/baseUrl" },
+        "keysUrl": { "$ref": "#/$defs/httpsUrl" }
+      }
+    },
+    "compat": {
+      "description": "Differences between OpenAI-compatible services. Only used when kind is 'openai'. Unknown fields are rejected.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "thinkingFormat": { "enum": ["openai", "deepseek", "qwen", "openrouter", "zai"] },
+        "requiresReasoningContentOnAssistantMessages": { "type": "boolean" },
+        "maxTokensField": { "enum": ["max_tokens", "max_completion_tokens"] },
+        "supportsDeveloperRole": { "type": "boolean" },
+        "supportsStore": { "type": "boolean" },
+        "supportsReasoningEffort": { "type": "boolean" },
+        "supportsUsageInStreaming": { "type": "boolean" },
+        "supportsStrictMode": { "type": "boolean" }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "properties": {
+        "contextWindow": { "$ref": "#/$defs/positiveInt" },
+        "maxOutputTokens": { "$ref": "#/$defs/positiveInt" },
+        "supportsTools": { "type": "boolean" },
+        "supportsParallelToolCalls": { "type": "boolean" },
+        "supportsReasoning": { "type": "boolean" }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "$ref": "#/$defs/modelId" },
+        "displayName": { "type": "string", "maxLength": 256 },
+        "contextWindow": { "$ref": "#/$defs/positiveInt" },
+        "maxOutputTokens": { "$ref": "#/$defs/positiveInt" },
+        "supportsTools": { "type": "boolean" },
+        "supportsParallelToolCalls": { "type": "boolean" },
+        "supportsReasoning": { "type": "boolean" },
+        "thinkingLevel": { "enum": ["low", "medium", "high"] },
+        "pricing": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["inputPerMillion", "outputPerMillion"],
+          "properties": {
+            "inputPerMillion": { "$ref": "#/$defs/price" },
+            "outputPerMillion": { "$ref": "#/$defs/price" },
+            "cacheReadPerMillion": { "$ref": "#/$defs/price" }
+          }
+        }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "required": ["id", "name", "kind", "baseUrl"],
+      "properties": {
+        "id": { "$ref": "#/$defs/pluginId" },
+        "name": { "$ref": "#/$defs/name" },
+        "icon": { "$ref": "#/$defs/httpsUrl" },
+        "kind": { "enum": ["openai", "anthropic", "gemini"] },
+        "category": { "enum": ["vendor", "relay", "local"] },
+        "baseUrl": { "$ref": "#/$defs/baseUrl" },
+        "regions": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": { "$ref": "#/$defs/region" }
+        },
+        "requiresKey": { "type": "boolean" },
+        "keysUrl": { "$ref": "#/$defs/httpsUrl" },
+        "compat": { "$ref": "#/$defs/compat" },
+        "models": {
+          "type": "array",
+          "maxItems": 64,
+          "items": { "$ref": "#/$defs/model" }
+        },
+        "suggestedModels": {
+          "type": "array",
+          "maxItems": 16,
+          "items": { "$ref": "#/$defs/modelId" }
+        },
+        "modelDefaults": { "$ref": "#/$defs/capabilities" }
+      }
+    }
+  }
+}

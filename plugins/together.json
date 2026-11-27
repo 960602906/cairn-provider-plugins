@@ -1,0 +1,31 @@
+{
+  "$schema": "../schema/provider-plugin.schema.json",
+  "schemaVersion": 1,
+  "id": "together",
+  "name": "Together AI",
+  "version": "1.0.0",
+  "description": "Together AI's OpenAI-compatible API for open-weight models.",
+  "homepage": "https://www.together.ai",
+  "providers": [
+    {
+      "id": "api",
+      "name": "Together AI",
+      "kind": "openai",
+      "category": "relay",
+      "baseUrl": "https://api.together.ai/v1",
+      "keysUrl": "https://api.together.ai/settings/api-keys",
+      "compat": {
+        "maxTokensField": "max_tokens",
+        "supportsDeveloperRole": false,
+        "supportsStore": false,
+        "supportsReasoningEffort": false
+      },
+      "suggestedModels": ["openai/gpt-oss-120b", "Qwen/Qwen3.7-Max", "zai-org/GLM-5.3"],
+      "modelDefaults": {
+        "contextWindow": 131072,
+        "maxOutputTokens": 32768,
+        "supportsReasoning": false
+      }
+    }
+  ]
+}
