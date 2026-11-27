@@ -2,17 +2,32 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/960602906/cairn-provider-plugins/main/schema/provider-plugin.schema.json",
   "title": "Cairn provider plugin (schemaVersion 1)",
-  "description": "Mirrors ProviderPluginManifest in @cairn/protocol, plus the optional icon fields. Unknown fields are ignored by Cairn, except inside compat.",
+  "description": "Mirrors ProviderPluginManifest in @cairn/protocol, plus the optional icon, type, source and author fields. Unknown fields are ignored by Cairn, except inside compat. This catalog also requires version, type, source and author (checked by scripts/validate.mjs).",
   "type": "object",
   "required": ["schemaVersion", "id", "name", "providers"],
   "properties": {
     "$schema": { "type": "string" },
     "schemaVersion": { "const": 1 },
     "id": { "$ref": "#/$defs/pluginId" },
+    "type": {
+      "description": "The kind of plugin. Provider (API) plugins are always 'provider'.",
+      "const": "provider"
+    },
     "name": { "$ref": "#/$defs/name" },
     "version": { "type": "string", "maxLength": 32 },
     "description": { "type": "string", "maxLength": 280 },
-    "homepage": { "$ref": "#/$defs/httpsUrl" },
+    "source": {
+      "description": "'official' for plugins maintained by Cairn, 'third-party' for plugins written by someone else.",
+      "enum": ["official", "third-party"]
+    },
+    "author": {
+      "description": "Display name of the plugin's author or organization.",
+      "$ref": "#/$defs/name"
+    },
+    "homepage": {
+      "description": "The plugin's website, shown as a link and used for the favicon fallback.",
+      "$ref": "#/$defs/httpsUrl"
+    },
     "icon": { "$ref": "#/$defs/httpsUrl" },
     "providers": {
       "type": "array",

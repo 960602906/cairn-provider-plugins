@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/960602906/cairn-provider-plugins/main/schema/index.schema.json",
-  "title": "Cairn provider plugin catalog index (schemaVersion 1)",
-  "description": "The list of plugins Cairn offers to install from this catalog. Unknown fields are ignored.",
+  "title": "Cairn plugin catalog index (schemaVersion 1)",
+  "description": "The list of plugins Cairn offers to install from this catalog. Unknown fields are ignored, and Cairn skips entries whose type it doesn't understand.",
   "type": "object",
   "required": ["schemaVersion", "plugins"],
   "properties": {
@@ -17,14 +17,30 @@
   "$defs": {
     "entry": {
       "type": "object",
-      "required": ["id", "name", "version", "url"],
+      "required": ["id", "type", "name", "version", "source", "author", "url"],
       "properties": {
         "id": {
           "description": "Must equal the id inside the plugin file.",
           "type": "string",
           "pattern": "^[a-z0-9](?:[a-z0-9-]{0,62}[a-z0-9])?$"
         },
+        "type": {
+          "description": "The kind of plugin. 'provider' adds model services (API plugins). Other kinds may be added later; Cairn skips types it doesn't understand. Must equal the type inside the plugin file.",
+          "type": "string",
+          "pattern": "^[a-z0-9](?:[a-z0-9-]{0,30}[a-z0-9])?$"
+        },
         "name": { "type": "string", "minLength": 1, "maxLength": 80, "pattern": "\\S" },
+        "source": {
+          "description": "'official' for plugins maintained by Cairn, 'third-party' for plugins written by someone else. Must equal the source inside the plugin file.",
+          "enum": ["official", "third-party"]
+        },
+        "author": {
+          "description": "Display name of the plugin's author or organization. Must equal the author inside the plugin file.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "\\S"
+        },
         "version": {
           "description": "Must equal the version inside the plugin file.",
           "type": "string",
@@ -33,7 +49,7 @@
         },
         "description": { "type": "string", "maxLength": 280 },
         "homepage": {
-          "description": "Must equal the homepage inside the plugin file. Used for the favicon fallback.",
+          "description": "The plugin's website, shown as a link. Must equal the homepage inside the plugin file. Also used for the favicon fallback.",
           "type": "string",
           "maxLength": 2048,
           "pattern": "^https://[^\\s/?#@]+(?:[/?#]\\S*)?$"

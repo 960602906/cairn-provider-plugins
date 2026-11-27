@@ -2,9 +2,12 @@
   "$schema": "../schema/provider-plugin.schema.json",
   "schemaVersion": 1,
   "id": "together",
+  "type": "provider",
   "name": "Together AI",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Together AI's OpenAI-compatible API for open-weight models.",
+  "source": "official",
+  "author": "Cairn",
   "homepage": "https://www.together.ai",
   "providers": [
     {

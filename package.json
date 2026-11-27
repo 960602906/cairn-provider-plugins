@@ -1,7 +1,7 @@
 {
   "name": "cairn-provider-plugins",
   "private": true,
-  "description": "Catalog of data-only provider plugins for Cairn.",
+  "description": "Cairn's plugin catalog: data-only provider plugins today, other plugin types later.",
   "license": "MIT",
   "type": "module",
   "scripts": {

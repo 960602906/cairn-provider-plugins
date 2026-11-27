@@ -2,9 +2,12 @@
   "$schema": "../schema/provider-plugin.schema.json",
   "schemaVersion": 1,
   "id": "cerebras",
+  "type": "provider",
   "name": "Cerebras",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cerebras Inference's OpenAI-compatible API for open-weight models.",
+  "source": "official",
+  "author": "Cairn",
   "homepage": "https://www.cerebras.ai",
   "providers": [
     {

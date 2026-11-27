@@ -2,9 +2,12 @@
   "$schema": "../schema/provider-plugin.schema.json",
   "schemaVersion": 1,
   "id": "acme",
+  "type": "provider",
   "name": "Acme Cloud (example)",
   "version": "1.0.0",
   "description": "Example only: acme.example is a reserved domain. Not listed in index.json.",
+  "source": "third-party",
+  "author": "Acme Inc. (example)",
   "homepage": "https://acme.example",
   "icon": "https://acme.example/icon.svg",
   "providers": [

@@ -2,9 +2,12 @@
   "$schema": "../schema/provider-plugin.schema.json",
   "schemaVersion": 1,
   "id": "vllm",
+  "type": "provider",
   "name": "vLLM",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A vLLM OpenAI-compatible server on this computer (vllm serve, default port 8000).",
+  "source": "official",
+  "author": "Cairn",
   "homepage": "https://docs.vllm.ai",
   "providers": [
     {
